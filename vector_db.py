@@ -51,6 +51,6 @@ if __name__ == "__main__":
     create_vector_store(
         docs_path="./docs",
         embedding_model="BAAI/bge-m3",
-        chunk_size=2000,
-        chunk_overlap=300
+        chunk_size=500,
+        chunk_overlap=100
     )
