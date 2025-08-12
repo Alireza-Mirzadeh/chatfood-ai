@@ -42,15 +42,20 @@ retriever = vectorstore.as_retriever(
                     "k": 2}
 )
 
-# Load LLM model
-llm = OllamaLLM(
-    model = "llama3.2",
-    temperature=0.3,        # less randomness, more factual/polite
-    top_p=0.9,              # control diversity
-    top_k=50,               # limit vocabulary sampling
-    repeat_penalty=1.1,     # discourage repeating same phrases
-    num_predict=512         # max tokens to generate
+# Function to load the LLM model
+def load_llm_model():
+    llm = OllamaLLM(
+        model="llama3.2",
+        temperature=0.3,        # less randomness, more factual/polite
+        top_p=0.9,              # control diversity
+        top_k=50,               # limit vocabulary sampling
+        repeat_penalty=1.1,     # discourage repeating same phrases
+        num_predict=512         # max tokens to generate
     )
+    return llm
+
+# Load LLM model
+llm = load_llm_model()
 
 # Context filter
 def classify_scope(query: str) -> str:
@@ -87,7 +92,7 @@ def classify_scope(query: str) -> str:
 
 
 # RAG tool
-#@tool
+@tool
 def rag_tool(query: str) -> str:
 
     '''
